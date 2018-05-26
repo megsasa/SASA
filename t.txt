@@ -1,0 +1,25 @@
+{
+  "name": "Project AWS",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://glitch.me/",
+  "author": "Meghrabi salah eddine <meghrabi94@gmail.com> && Alexandre ",
+  "license": "none",
+  "scripts": {
+    "start": "node server",
+    "watch": "nodemon server && mongod"
+  },
+  "dependencies": {
+        "nunjucks": "^3.1.2",
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "connect-mongo": "^2.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.17",
+    "nodemon": "^1.17.4"
+  },
+  "engines": {
+    "node": "8.x"
+  }
+}
