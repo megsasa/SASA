@@ -137,7 +137,7 @@
        element.find("#btnDeleteEvent").click(function(){
          swal({
   title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
+  text: "Once deleted, you will not be able to recover this event !",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -145,11 +145,11 @@
 .then((willDelete) => {
   if (willDelete) {
             Eventdelete(event);
-    swal("Poof! Your imaginary file has been deleted!", {
+    swal("Poof! Your request has been sent!", {
       icon: "success",
     });
   } else {
-    swal("Your imaginary file is safe!");
+    swal("Your event is safe!");
   }
 });
             });

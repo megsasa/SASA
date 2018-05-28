@@ -20,7 +20,7 @@ router.get('/',(req,res)=>{
     }
 });
  router.post('/',function(req,res){
-    if(!req.session.user ){
+   if(!req.session.user ){
         res.redirect('/login');
     }else{
     if(req.body.EventID==null) res.redirect('/',403);  
@@ -36,10 +36,12 @@ router.get('/',(req,res)=>{
         mEvents.findOne({_id: req.body.EventID },function(err,event){
             if(event.userId != req.session.user.username)res.redirect('/act?action=failed');  
             else {
-                mEvents.update({_id: req.body.EventID},doc,function(err, data){
-                    if (err)res.redirect('/act?action=failed');             
-                      res.redirect('/act?action= success');
+                mEvents.findByIdAndUpdate( req.body.EventID, doc,{new: true},function(error, model){
+                    if (error)return ;  
+                      return ;
                     });
+              res.redirect('/');
+              
             }
                                                      });
 

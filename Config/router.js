@@ -48,7 +48,8 @@ router.post('/signin', function (req, res, next) {
     var userData = {
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      accessLevel:1
     }
 
     User.create(userData, function (error, user) {
@@ -148,6 +149,7 @@ router.post('/effacer',function(req,res){
 }else{
 if(req.body.EventID==null) res.redirect('/',403);  
 if(req.session.user.accessLevel <3 )res.status(500).send({error: 'you have an error'});
+  else{
 if(req.session.user.accessLevel!=4)
 {
     mEvents.findOne({_id: req.body.EventID },function(err,event){
@@ -173,23 +175,27 @@ if(req.session.user.accessLevel!=4)
           }); 
 
     }   
-    }
+    }}
+});
+router.get('/act', function (req, res,next) {
+
+  var Error={
+    msg: "vous n'avez pas le droit pour faire cette action !!",
+    type:0
+  };
+  if(req.query.action=="failed")
+  return res.render('principal.html', {title: "Accueil",current: req.session.user,Error:Error});
+ res.redirect('/');
 });
 
+/*
 router.get('/:name', (req, res) => {
   if(req.params.name!=""){
     res.render('principal.html', {title: "calendar of "+req.body.name  ,current: req.session.user});
   }
 });
+*/
 
-router.get('/act', function (req, res,next) {
 
-  var Error={
-    msg: "vous n'avez pas le droit pour faire cette action !!",
-    type:1
-  };
-  if(req.query.action=="failed")
-  return res.render('principal.html', {title: "Accueil",current: req.session.user,Error:Error})
- res.redirect('/');
-});
+
 module.exports = router;

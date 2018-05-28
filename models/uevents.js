@@ -40,12 +40,11 @@ EventSchema.pre('save', function (next) {
      }
   });
 }) ;
-EventSchema.pre('update', function (next) {
-  var self = this;
+EventSchema.pre('findOneAndUpdate', function (next) {
   UserEvents.find({ $or: [ 
-    { start : { $lt: self.start }, end : { $gt: self.start } },
-    { start : { $lt: self.end }, end : { $gt: self.end } },
-    { start : { $gt: self.start }, end : { $lt: self.end } }
+    { start : { $lt: this._update.start }, end : { $gt: this._update.start } },
+    { start : { $lt: this._update.end }, end : { $gt: this._update.end } },
+    { start : { $gt: this._update.start }, end : { $lt: this._update.end } }
   ]}, function (err, docs) {
       if (!docs.length){
           next();
