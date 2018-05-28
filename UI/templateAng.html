@@ -100,6 +100,7 @@
     <script>
       
       $(document).ready(function() {
+        
 		 $('#calendar').fullCalendar({
           
           header: {
@@ -236,7 +237,30 @@
                 $('#calendar').fullCalendar('refetchEvents' );
                }
             });
-        }  
+        }
+       function UserEdit(user){
+              
+                 $.ajax({
+               type:"POST",
+               url:"/admin",
+               data:user,    // multiple data sent using ajax
+              success: function (Data) {
+                toastr.success('Modification avec succés !', 'Modification');
+                location.reload(); 
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                toastr.error("Modification problem !", 'Operation!') 
+                 location.reload(); 
+               }
+            });
+        }
+$('#myForm input[type=radio]').change(function() {  
+  var User={
+    uId:this.id,
+    accessLevel:this.value
+  };
+    UserEdit(User); 
+});      
     </script>
   </body>
 </html>

@@ -21,14 +21,45 @@ router.get('/Login', (req, res) => {
     res.redirect('/Profile');
   } else res.render('login.html', {title: "Login"});
 });
-router.get('/Admin', (req, res) => {
-  if (!req.session.user) {
-    res.redirect('/login');
-   
-  } else if(req.session.user.accessLevel!=4)
-    res.redirect('/act?action=failed');
-  else
-  res.render('ajouter.html', {title: "Administration",current: req.session.user});
+router.get('/Admin',async (req, res) => {
+   if(!req.session.user || req.session.accessLevel<4){
+        res.redirect('/login');
+    }else{
+      try {
+      res.render('admin.html', { 
+        users: await User.find({},function(err,docs){
+        return docs;
+           }) ,
+        current: req.session.user,
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error');
+    }
+       
+    }
+});
+router.post('/Admin', (req, res) => {
+   if(!req.session.user || req.session.accessLevel<4){
+        res.redirect('/login');
+    }else{
+      var doc = {
+            accessLevel: req.body.accessLevel 
+        };
+      try {
+        User.update({_id: req.body.uId},doc,function(err, data){
+                 if (err) {
+                    res.status(500).send({error: 'you have an error'});
+                 }        
+              else res.send();
+            });
+      
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error');
+    }
+       
+    }
 });
 
 //POST route for updating data
@@ -119,6 +150,7 @@ router.get('/logout', function (req, res, next) {
     });
   }
 });
+
 router.post('/ajouter',function(req,res){
   
   if(!req.session.user){

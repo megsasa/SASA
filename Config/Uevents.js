@@ -25,7 +25,7 @@ router.get('/',(req,res)=>{
     }else{
     if(req.body.EventID==null) res.redirect('/',403);  
     if(req.session.user.accessLevel <2 )res.redirect('/act?action=failed');   
-    var doc = {
+    else {var doc = {
         title: req.body.title,
         start: req.body.start,
         end: req.body.end ,
@@ -38,7 +38,7 @@ router.get('/',(req,res)=>{
             else {
                 mEvents.findByIdAndUpdate( req.body.EventID, doc,{new: true},function(error, model){
                     if (error)return ;  
-                      return ;
+                      return res.redirect('/');
                     });
               res.redirect('/');
               
@@ -52,7 +52,7 @@ router.get('/',(req,res)=>{
         });
     
 }   
-    }
+    }}
     });
 
     router.put('/',function(req,res){
@@ -62,7 +62,7 @@ router.get('/',(req,res)=>{
         if(req.body.EventID==null) res.redirect('/',403);  
         if(req.session.user.accessLevel <2 ){
           res.status(500).send({error: 'you have an error'});
-        }
+        }else{
         var doc = {
             title: req.body.title,
             start: req.body.start,
@@ -92,7 +92,7 @@ router.get('/',(req,res)=>{
             });
         
             }   
-            }
+            }}
     });
 
 // router.get('/:id',function(req,res){
