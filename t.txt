@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "repository": "https://glitch.me/",
-  "author": "Meghrabi salah eddine <meghrabi94@gmail.com> && Alexandre ",
+  "author": "Meghrabi salah eddine <meghrabi94@gmail.com> && Charpentier Alexandre <alex.charpt@gmail.com",
   "license": "none",
   "scripts": {
     "start": "node server",

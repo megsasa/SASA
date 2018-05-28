@@ -8,6 +8,9 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 
     <link href="libs/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs/css/reveal.css">
+		<link rel="stylesheet" href="libs/css/black.css">
+	  <script src="./libs/js/reveal.js"></script>
 
   </head>
   <body>
@@ -76,20 +79,20 @@
 </div>
 <!-- /navbar -->
 {% endblock %}
-   <div class="container">
-            <div class='col-md-12'>
+   
                     {% if Error %}
                     <div {% if Error.type==1 %}class='alert alert-info'{% else %} class='alert alert-danger margin-top-40' role='alert' {% endif %} >{{Error.msg}}</div>
                     {% endif %}
 
     {% block main %}
     {% endblock %}
-     </div>
-   </div>
+  
     
 
     
     
-    
+		<script>
+			Reveal.initialize();      
+		</script>    
   </body>
 </html>

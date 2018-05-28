@@ -6,7 +6,11 @@
 
 {% block title %}Accueil{% endblock %}
 
+
+
 {% block main %}
+{% if current %}
+            
 
 <div id="calendar">
 </div>
@@ -131,6 +135,22 @@
     </div>
   </div>
 </div>
-  
+{% else %}
+<div class="reveal">
+			<div class="slides">
+				<section>Présentation du projet</section>
+				<section>Calendrier</section>
+        <section>
+			        <section>Vertical Slide 1</section>
+			        <section>Vertical Slide 2</section>
+          
+          
+		    </section> 
+        <section>Présentation des fonctionnalités du site</section>
+        <section>Fin</section>
+			</div>
+		</div>
+
+{% endif %}   
 
 {% endblock %}
