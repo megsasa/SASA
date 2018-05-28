@@ -21,13 +21,13 @@ router.get('/Login', (req, res) => {
     res.redirect('/Profile');
   } else res.render('login.html', {title: "Login"});
 });
-router.get('/Admin',async (req, res) => {
+router.get('/Admin', (req, res) => {
    if(!req.session.user || req.session.accessLevel<4){
-        res.redirect('/login');
+        res.redirect('/');
     }else{
       try {
       res.render('admin.html', { 
-        users: await User.find({},function(err,docs){
+        users:  User.find({},function(err,docs){
         return docs;
            }) ,
         current: req.session.user,
@@ -41,7 +41,7 @@ router.get('/Admin',async (req, res) => {
 });
 router.post('/Admin', (req, res) => {
    if(!req.session.user || req.session.accessLevel<4){
-        res.redirect('/login');
+        res.status(500).send({error: 'you have an error'});
     }else{
       var doc = {
             accessLevel: req.body.accessLevel 
