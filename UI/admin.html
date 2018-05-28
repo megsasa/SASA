@@ -1,0 +1,47 @@
+
+{% extends "templateAng.html" %}
+
+{% block title %}Ajouter{% endblock %}
+
+{% block main %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for user in users %}
+     <tr>
+      
+      <th scope="row">#</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+       <div id="myForm" class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label {% if user.accessLevel ==1 %}class="btn btn-secondary active"{%else%} class="btn btn-secondary"{% endif %}>
+    <input type="radio" name="options" id="{{ user._id }}" value="1" autocomplete="off" {% if user.accessLevel ==1 %}checked{% endif %}> User
+  </label>
+  <label {% if user.accessLevel ==2 %}class="btn btn-secondary active"{%else%} class="btn btn-secondary"{% endif %}>
+    <input type="radio" name="options" id="{{ user._id }}" value="2" autocomplete="off" {% if user.accessLevel ==2 %}checked{% endif %}> Editeur
+  </label>
+  <label {% if user.accessLevel ==3 %}class="btn btn-secondary active"{%else%} class="btn btn-secondary"{% endif %}>
+    <input type="radio" name="options" id="{{ user._id }}" value="3" autocomplete="off" {% if user.accessLevel ==3 %}checked{% endif %} > Editeur++
+  </label>
+         <label {% if user.accessLevel ==4 %}class="btn btn-secondary active"{%else%} class="btn btn-secondary"{% endif %}>
+    <input type="radio" name="options" id="{{ user._id }}" value="4" autocomplete="off" {% if user.accessLevel ==4 %}checked{% endif %}> Admin
+  </label>
+</div>
+       </td>
+    </tr>
+  
+{% endfor %}
+   
+  </tbody>
+</table>
+<table>
+{% endblock %}
